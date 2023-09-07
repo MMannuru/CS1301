@@ -121,5 +121,3 @@ def wizardOfOz(maxDistance, maxHostility):
 
 
 
-print("You're a piece of shit")
-
