@@ -103,21 +103,3 @@ def wizardOfOz(maxDistance, maxHostility):
     else:
         return "Dorothy must go back to Kansas."
 #########################################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
