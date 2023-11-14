@@ -1,0 +1,124 @@
+
+"""
+Georgia Institute of Technology - CS1301
+Homework 4 - Strings and Lists
+"""
+#########################################
+"""
+Function Name: makeChange()
+Parameters: total (float), payment (str)
+Returns: changeAmount (str)
+"""
+def makeChange(total, payment):
+    count = 0
+    for i in range(len(payment)):
+        if payment[i] == "d":
+            count += 1
+        elif payment[i] == "q":
+            count += .25
+        elif payment[i] == "n":
+            count += .05
+    changeAmount = total - count
+    changeAmount = round(changeAmount, 2)
+    changeAmount = str(abs(changeAmount))
+
+    if float(changeAmount) > 0:
+        return "${} is your change.".format(changeAmount)
+    else:
+        return "Not enough payment for the total."
+
+
+#########################################
+"""
+Function Name: prepareFood()
+Parameters: orders (str)
+Returns: food (list)
+"""
+def prepareFood(orders):
+        cleanOrders = ""
+        for i in range(len(orders)):
+            if orders[i] not in ("!", "@", "$", "#"):
+                cleanOrders += orders[i]
+
+        orderList = cleanOrders.split("*")
+
+        result = []
+
+        for order in orderList:
+            cleanOrder = ''.join(filter(str.isalpha, order)).lower()
+            if cleanOrder.startswith("b"):
+                result.extend([cleanOrder[1:], cleanOrder[1:]])
+            elif not cleanOrder.startswith("o"):
+                result.append(cleanOrder)
+
+        return sorted(result)
+
+
+
+#########################################
+"""
+Function Name: drivingTest()
+Parameters: rubric (list), actions (list)
+Returns: results (str)
+"""
+def drivingTest(rubric, actions):
+    score = 0
+    for action in actions:
+        for item in rubric:
+            if item[0] == action:
+                score += item[1]
+    if score < 200:
+        return "With a score of {}, SpongeBob has failed once again!".format(score)
+    else:
+        return "With a score of {}, SpongeBob has passed his driving test!".format(score)
+
+
+#########################################
+"""
+Function Name: musicalNight()
+Parameters: potentialMembers (list), membersInstruments (list),
+squidwardInstruments (list)
+Returns: bandMembers (list)
+"""
+def musicalNight(potentialMembers, membersInstruments, squidwardInstruments):
+    bandMembers = []
+    for i in range(len(potentialMembers)):
+        if membersInstruments[i] in squidwardInstruments:
+            bandMembers.append(potentialMembers[i])
+
+    if len(bandMembers) > 0:
+        return sorted(bandMembers)
+    else:
+        print("I guess it's just me and you Clarry : /")
+        return []
+
+#########################################
+"""
+Function Name: dayOut()
+Parameters: spongebobFavorites (list), friends (list),
+friendsFavorites (list)
+Returns: friendsToHangout (list)
+"""
+
+
+def dayOut(spongebobFavorites, friends, friendsFavorites):
+    friendsToHang = []
+
+    for i in range(len(friends)):
+        count = 0
+
+        for place in spongebobFavorites:
+            if place in friendsFavorites[i]:
+                count += 1
+
+        if count >= 2:
+            friendsToHang.append(friends[i])
+
+    if len(friendsToHang) > 0:
+        return sorted(friendsToHang)
+    else:
+        print("It's just a day of fine dining and breathing")
+        return []
+
+
+#########################################
