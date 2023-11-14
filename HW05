@@ -1,0 +1,110 @@
+"""
+Georgia Institute of Technology - CS1301
+Homework 5 - Tuples and Modules
+"""
+#########################################
+"""
+Function Name: bestMachine()
+Parameters: machines (list), rating (list)
+Returns: highestRated (list)
+"""
+def bestMachine(machines, rating):
+    count = 0
+    maxRating = max(rating)
+    highestRated = []
+
+    for machine in machines:
+        if rating[count] == maxRating:
+            highestRated.append((machine, maxRating))
+        count += 1
+
+    highestRated.sort()
+
+    return highestRated
+"""
+Function Name: bulkOrder()
+Parameters: foodCatalog (list)
+Returns: foodsAndPrice(list)
+"""
+def bulkOrder(foodCatalog):
+    foodsAndPrice = []
+    total_cost = 0
+
+    for food in foodCatalog:
+        food_name, price, protein = food
+        if price < 8 and protein >= 20:
+            foodsAndPrice.append(food_name)
+            total_cost += price
+
+    if foodsAndPrice:
+        foodsAndPrice.sort()
+        return [foodsAndPrice, total_cost]
+    else:
+        return [[], 0]
+"""
+Function Name: organizeTimes()
+Parameters: unorganizedTimeList (list)
+Returns: organizedTimeList (list)
+"""
+def organizeTimes(unorganizedTimeList):
+    organizedTimeList = []
+
+    for time, name in unorganizedTimeList:
+        max_time = max(time)
+        time.remove(max_time)
+        time.sort()
+
+        organizedTimeList.append((name, time))
+
+    organizedTimeList.sort()
+
+    return organizedTimeList
+"""
+Function Name: whenWaterslide()
+Parameters: freeTime (list)
+Returns everyoneCanGo (bool)
+"""
+
+import calendar
+
+def whenWaterslide(freeTime):
+    import calendar
+    waterslideOpen = [0, 3, 4]
+    visitedNames = []
+    finalNames = []
+    for person, available_days in freeTime:
+        finalNames.append(person)
+        for month, day in available_days:
+            if calendar.weekday(2023, month, day) in waterslideOpen:
+                if person not in visitedNames:
+                    visitedNames.append(person)
+                    break
+    if visitedNames == finalNames:
+        return True
+    else:
+        return False
+"""
+Function Name: findPlates()
+Parameters: maxBench (int)
+Returns: numPerPlate (list)
+"""
+import gymBroTools
+def findPlates(maxBench):
+    if maxBench % 5 != 0 or maxBench > 645 or maxBench <= 45:
+        return []
+
+    platesRequired = gymBroTools.plateCalculator(maxBench)
+    plateWeights = {45: 0, 35: 0, 25: 0, 10: 0, 5: 0}
+
+    for weight in platesRequired:
+        weight = int(weight)
+        if weight in plateWeights:
+            plateWeights[weight] += 1
+
+    weightsList = []
+
+    for weight, count in plateWeights.items():
+        if count > 0:
+            weightsList.append((weight, count))
+
+    return weightsList
